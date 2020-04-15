@@ -17,7 +17,7 @@ jobs:
       run: .github/scripts/docker-quick-build.sh
       env:
         DOCKER_NAME: bradynpoulsen/dnscrypt-proxy
-        DOCKER_FILE: dnscrypt-proxy/Dockerfile
+        DOCKER_PATH: dnscrypt-proxy/
         DOCKER_TAG: ${{ steps.tag.outputs.date }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
