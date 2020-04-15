@@ -1,0 +1,23 @@
+name: "Docker Build: dns-secure-proxy"
+
+on:
+  schedule:
+    - cron: '0 0 * * SUN'
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - id: tag
+      run: echo "::set-output name=date::$(date '+%d%b%y-%H%M' | tr '[:lower:]' '[:upper:]')"
+    - name: Quick Build Latest
+      run: .github/scripts/docker-quick-build.sh
+      env:
+        DOCKER_NAME: bradynpoulsen/dns-secure-proxy
+        DOCKER_PATH: dns-secure-proxy/
+        DOCKER_TAG: ${{ steps.tag.outputs.date }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
